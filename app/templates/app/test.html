@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #21272A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            margin-block: 2rem;
+            width: 35rem;
+            height: 90rem;
+            background-color: #000000;
+            position: relative;
+        }
+
+        section {
+            height: 88rem;
+            background-color: #00383a;
+        }
+
+        .add_form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            bottom: 2rem;
+        }
+
+        input {
+            position: relative;
+        }
+
+        .add_button {
+            position: absolute;
+            margin-left: 15rem;
+        }
+
+        .clear_button {
+            position: absolute;
+            right: 1rem;
+            bottom: 0rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section></section>
+        <form class="add_form">
+            <input type="text">
+            <button class="add_button">Dodaj</button>
+        </form>
+        <button class="clear_button">Clear</button>
+    </main>
+</body>
+
+</html>
