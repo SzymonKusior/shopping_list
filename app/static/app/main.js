@@ -33,5 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     const userInput = document.getElementById("userInput");
-    userInput.focus();
+    if (userInput){
+        userInput.focus();
+    }
+    const loginUsernameField = document.getElementById("usernameLoginField");
+    if (loginUsernameField){
+        loginUsernameField.focus();
+    }
 });

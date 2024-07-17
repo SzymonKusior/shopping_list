@@ -14,7 +14,8 @@
         <textarea class="item_description" name="description" id="description_text"
             placeholder="Dodaj opis">{% if selected_item.description != None %}{{selected_item.description}}{% endif %}</textarea>
     </form>
-    <p class="created_at">Created at: {{selected_item.created}}</p>
+    <p class="created_at">Created at: {{selected_item.created }}</p>
+    by {{ selected_item.user}}
 
 </aside>
 {% endblock content %}

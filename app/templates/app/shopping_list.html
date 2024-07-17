@@ -1,69 +1,75 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
+{% extends "app/main.html" %}
+{% block content %}
+<header>
+  <h1 class="header_title">Shopping list</h1>
+  {% if user.is_authenticated%}
+  <h3>{{user.get_username}}</h3>
+    <form method="POST" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button class="logout_button">Logout</button>
+      {% if selected_item %}
+        <input type="hidden" value="{{selected_item.id}}" name="current_pk">
+      {% endif %}
+    </form>
+  {% else %}
+    <form method="POST" class="go_to_login_form flex center" action="{% url 'loginPage' %}">
+      {% csrf_token %}
+      <button class="go_to_login_button">Login</button>
+    </form>
+    <form method="POST" class="go_to_login_form flex center" action="{% url 'registerPage' %}">
+      {% csrf_token %}
+      <button class="go_to_login_button">Register</button>
+    </form>
+  {% endif %}
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{% static 'app/main.css' %}">
-  <link rel="icon" href="{% static 'app/favicon.ico' %}" type="image/x-icon">
-  <title>Shopping List</title>
-</head>
-
-<body>
-  <header>
-    <h1>Shopping list</h1>
-  </header>
-  <main>
-    <section>
-      <div class="list">
-        {%if not shopping_list %}
-        <h2 class="emptyListText center flex">Add something to your list...</h2>
-        {% else %}
-        {% for item in shopping_list %}
-        <a class="item" href="{%url 'itemDetail' item.id %}">
-            <form class="complete_checkbox" method="post" action="{% url 'itemComplete' item.id %}">
-              {% csrf_token %}
-              {% if selected_item %}
-                <input type="hidden" name="current_pk" value="{{ selected_item.id }}">
-              {% endif %}
-              <label class="switch">
-                <input type="checkbox" name="complete" onchange="this.form.submit()" {%if item.complete %}
-                  checked {%endif%}>
-                <span class="slider"></span>
-              </label>
-            </form>
-              <p class="item_text {%if item.complete %} item_completed {% endif %}">{{item.name}}</p>
-            <form method="post" action="{% url 'itemDelete' item.id %}" class="flex">
-              {% csrf_token %}
-              {% if selected_item and selected_item.id != item.id %}
-                <input type="hidden" name="current_pk" value="{{ selected_item.id }}">
-              {% endif %}
-              <input class="usun" type="submit" value="&#128465" />
-            </form>
-          </a>
-        {% endfor %}
-        {% endif %}
-      </div>
-      <form class="add_form flex center" method="post" action="{% url 'itemAdd' %}">
-        {% csrf_token %}
-        {% if selected_item %}
-          <input type="hidden" name="current_pk" value="{{ selected_item.id }}">
-        {% endif %}
-        <input type="text" class="input" id="userInput" name="name" autocomplete="off" data-1p-ignore/>
-        <input class="add_submit" type="submit" value="Dodaj"/>
-      </form>
-      <form method="POST" action="{% url 'clearAllItems' %}" class="clearAllForm">
-        {% csrf_token %}
-      <button class="clearAllButton">Clear</button>
-      </form>
-    </section>
-    {%if selected_item %}
-    <div class="gap"></div>
-    {% include 'app/item_detail.html'%}
-    {%endif%}
-  </main>
-<script src="{% static 'app/main.js' %}"></script>
-</body>
-
-</html>
+</header>
+<main>
+  <section>
+    <div class="list">
+      {%if not shopping_list %}
+      <h2 class="emptyListText center flex">Add something to your list...</h2>
+      {% else %}
+      {% for item in shopping_list %}
+      <a class="item" href="{%url 'itemDetail' item.id %}">
+          <form class="complete_checkbox" method="post" action="{% url 'itemComplete' item.id %}">
+            {% csrf_token %}
+            {% if selected_item %}
+              <input type="hidden" name="current_pk" value="{{ selected_item.id }}">
+            {% endif %}
+            <label class="switch">
+              <input type="checkbox" name="complete" onchange="this.form.submit()" {%if item.complete %}
+                checked {%endif%}>
+              <span class="slider"></span>
+            </label>
+          </form>
+            <p class="item_text {%if item.complete %} item_completed {% endif %}">{{item.name}}</p>
+          <form method="post" action="{% url 'itemDelete' item.id %}" class="flex">
+            {% csrf_token %}
+            {% if selected_item and selected_item.id != item.id %}
+              <input type="hidden" name="current_pk" value="{{ selected_item.id }}">
+            {% endif %}
+            <input class="usun" type="submit" value="&#128465" />
+          </form>
+        </a>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <form class="add_form flex center" method="post" action="{% url 'itemAdd' %}">
+      {% csrf_token %}
+      {% if selected_item %}
+        <input type="hidden" name="current_pk" value="{{ selected_item.id }}">
+      {% endif %}
+      <input type="text" class="input" id="userInput" name="name" autocomplete="off" data-1p-ignore/>
+      <input class="add_submit" type="submit" value="Dodaj"/>
+    </form>
+    <form method="POST" action="{% url 'clearAllItems' %}" class="clearAllForm">
+      {% csrf_token %}
+    <button class="clearAllButton">Clear</button>
+    </form>
+  </section>
+  {%if selected_item %}
+  <div class="gap"></div>
+  {% include 'app/item_detail.html'%}
+  {%endif%}
+</main>
+{% endblock content %}

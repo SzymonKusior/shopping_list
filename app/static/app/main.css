@@ -5,6 +5,7 @@
 }
 
 * {
+  box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -14,23 +15,27 @@
 body {
   width: 100%;
   min-height: 100vh;
-  min-height: 100svh;
+  /* min-height: 100svh; */
   font-family: "Overpass", sans-serif;
   background: linear-gradient(140deg,rgb(92, 78, 212)10%,rgb(250, 69, 241), rgb(165, 201, 255));
   overflow-x: hidden;
 }
 
-header, .item,.add_form, .flex, .complete_checkbox  {
+.item,.add_form, .flex, .complete_checkbox  {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 header {
+    display: flex;
+    align-items: center;
+    justify-content:end;
+    height: 4.5rem;
     color: white;
     width: 100%;
 }
 main {
-    margin: 1rem 0 2rem 0;
+    margin-bottom: 2rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -216,8 +221,15 @@ div.list {
 
   box-shadow: 2px 2px 5px -2px #000000aa, inset 0px 0px 30px #ffffffaa;
 }
+.header_title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 h1 {
-  margin-top: 1rem;
+  /* flex: 1; */
+  text-align: center;
+  /* margin-top: 1rem; */
 }
 h5 {
     font-weight: normal;
@@ -380,4 +392,27 @@ h5 {
 }
 .emptyListText {
   text-shadow: 1px 1px 3px #00000077;
+}
+
+.go_to_login_button {
+  height: 70%;
+  font-size:medium;
+  width: 4rem;
+  background: #ffffff55;
+  border: none;
+}
+.go_to_login_form {
+  height: 100%;
+} 
+
+.login_container {
+  height: 100vh;
+}
+.login_card{
+  width: 40rem;
+  height: 30rem;
+  background-color: #aaa;
+}
+.username_field {
+  border-radius: 1rem;
 }

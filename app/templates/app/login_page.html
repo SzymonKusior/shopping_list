@@ -1,0 +1,24 @@
+{% extends "app/main.html" %}
+{% block content %}
+
+<div class="login_container flex center">
+    <div class="login_card">
+        <h1>Login</h1>
+        <form method="POST" >
+            {% csrf_token %}
+            <div class="username login_form_field"> 
+            {{ loginForm.username.as_field_group}}
+            </div>
+            <div class="username login_form_field"> 
+                {{loginForm.password.as_field_group}}
+            </div>
+            <button class="login_submit">Login</button>
+        </form>
+        <form method="POST" action="{% url 'registerPage'%}">
+            {% csrf_token %}
+            <button>go Register</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
